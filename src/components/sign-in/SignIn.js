@@ -5,6 +5,8 @@ import "./SignIn.scss";
 import Input from "../input/Input";
 import Button from "../button/Button";
 
+import { signInWithGoogle } from "../../firebase/firebase.utils";
+
 class SignIn extends Component {
   state = {
     email: "",
@@ -44,7 +46,13 @@ class SignIn extends Component {
             handleChange={this.handleChange}
             required
           />
-          <Button type="submit">Sign In</Button>
+
+          <div className="buttons">
+            <Button type="submit">Sign In</Button>
+            <Button onClick={signInWithGoogle} isGoogleSignIn>
+              Sign In With Google
+            </Button>
+          </div>
         </form>
       </div>
     );
