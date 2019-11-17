@@ -1,9 +1,9 @@
 import React from "react";
 import Popup from "reactjs-popup";
 
-import "./CollectionPreview.scss";
+import "./BooksPreview.scss";
 
-const CollectionPreview = ({ title, image_url, authors }) => (
+const BooksPreview = ({ title, image_url, authors }) => (
   <div className="collection-item">
     <div
       className="image"
@@ -37,4 +37,4 @@ const Card = ({ title, authors }) => (
   </div>
 );
 
-export default CollectionPreview;
+export default BooksPreview;

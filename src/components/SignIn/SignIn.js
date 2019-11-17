@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 
+//Components
+import Input from "../Common/input/Input";
+import Button from "../Common/button/Button";
+
+//Styling
 import "./SignIn.scss";
 
-import Input from "../input/Input";
-import Button from "../button/Button";
-
+//Utils
 import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 class SignIn extends Component {

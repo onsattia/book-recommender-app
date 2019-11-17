@@ -1,5 +1,6 @@
 import React from "react";
 
+//Styling
 import "./Input.scss";
 
 const Input = ({ handleChange, label, ...props }) => {

@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 
+//Components
+import Input from "../Common/input/Input";
+import Button from "../Common/button/Button";
+
+//Styling
 import "./SignUp.scss";
 
-import Input from "../input/Input";
-import Button from "../button/Button";
-
+//Utils
 import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 
 export class SignUp extends Component {

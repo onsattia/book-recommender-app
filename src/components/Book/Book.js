@@ -1,12 +1,12 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 
-import "./MenuItem.scss";
+//Styling
+import "./Book.scss";
 
-const MenuItem = ({ title, imageUrl, src }) => {
+const Book = ({ src }) => {
   return (
     <div className="menu-item">
-      <img className="image" src={src} />
+      <img className="image" src={src} alt="" />
       <div>Rate this book</div>
       <div className="rating">
         <input type="radio" name="star" id="star1" />
@@ -28,4 +28,4 @@ const MenuItem = ({ title, imageUrl, src }) => {
   );
 };
 
-export default withRouter(MenuItem);
+export default Book;

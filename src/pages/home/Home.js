@@ -1,8 +1,10 @@
 import React from "react";
-// Styles
-import "./Home.scss";
+
 // Components
-import Directory from "../../components/directory/Directory";
+import Directory from "../../components/Directory/Directory";
+
+// Styling
+import "./Home.scss";
 
 const Home = () => (
   <div className="home">

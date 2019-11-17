@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import book from "../../assets/book.jpg";
-import "./Directory.scss";
+//Components
+import Book from "../Book/Book";
 
-import MenuItem from "../../components/menu-item/MenuItem";
+//Styling
+import "./Directory.scss";
 
 class Directory extends Component {
   state = {
@@ -51,10 +52,10 @@ class Directory extends Component {
       return <div>Loading...</div>;
     } else {
       mostRatedBooks = this.state.mostRatedBooks.map(res => (
-        <MenuItem key={res.isbn} title={res.title} src={res.image_url} />
+        <Book key={res.isbn} title={res.title} src={res.image_url} />
       ));
       mostReviewedBooks = this.state.mostReviewedBooks.map(res => (
-        <MenuItem key={res.isbn} title={res.title} src={res.image_url} />
+        <Book key={res.isbn} title={res.title} src={res.image_url} />
       ));
       highlyRatedAuthors = this.state.highlyRatedAuthors.map((res, index) => (
         <div key={index}>

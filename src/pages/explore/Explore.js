@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import CollectionPreview from "../../components/collection-preview/CollectionPreview";
+//Components
+import BooksPreview from "../../components/BooksPreview/BooksPreview";
 
+//Styling
 import "./Explore.scss";
 
 class Shop extends Component {
@@ -23,7 +25,7 @@ class Shop extends Component {
       <div className="explore">
         <div className="preview">
           {books.map(({ isbn, ...props }) => (
-            <CollectionPreview key={isbn} {...props} />
+            <BooksPreview key={isbn} {...props} />
           ))}
         </div>
       </div>

@@ -1,9 +1,11 @@
 import React from "react";
 
-import "./Sign.scss";
+//Components
+import SignIn from "../../components/SignIn/SignIn";
+import SignUp from "../../components/SignUp/SignUp";
 
-import SignIn from "../../components/sign-in/SignIn";
-import SignUp from "../../components/sign-up/SignUp";
+//Styling
+import "./Sign.scss";
 
 const Sign = () => {
   return (

@@ -2,14 +2,15 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
-var config = {
-  apiKey: "AIzaSyDbuhEEysWd5qlLIGB9vJjZ0OVEKqK2vQg",
-  authDomain: "crossfit-box.firebaseapp.com",
-  databaseURL: "https://crossfit-box.firebaseio.com",
-  projectId: "crossfit-box",
-  storageBucket: "crossfit-box.appspot.com",
-  messagingSenderId: "608215340854",
-  appId: "1:608215340854:web:3559f9555d27ef6b"
+const config = {
+  apiKey: "AIzaSyB4Ezf9-hbMbFfSMCj9FIWg638sGSOiOlw",
+  authDomain: "book-recommender-app.firebaseapp.com",
+  databaseURL: "https://book-recommender-app.firebaseio.com",
+  projectId: "book-recommender-app",
+  storageBucket: "book-recommender-app.appspot.com",
+  messagingSenderId: "965520326887",
+  appId: "1:965520326887:web:fb8ff5471c775be8a32242",
+  measurementId: "G-V5PEJPJ2VS"
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
