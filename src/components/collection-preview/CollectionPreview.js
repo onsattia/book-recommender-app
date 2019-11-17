@@ -1,19 +1,39 @@
 import React from "react";
-
-import CollectionItem from "../collection-item/CollectionItem";
+import Popup from "reactjs-popup";
 
 import "./CollectionPreview.scss";
 
-const CollectionPreview = ({ title, items }) => (
-  <div className="collection-preview">
-    <h1 className="title">{title.toUpperCase()}</h1>
-    <div className="preview">
-      {items
-        .filter((item, idx) => idx < 4)
-        .map(item => (
-          <CollectionItem key={item.id} item={item} />
-        ))}
+const CollectionPreview = ({ title, image_url, authors }) => (
+  <div className="collection-item">
+    <div
+      className="image"
+      style={{
+        backgroundImage: `url(${image_url})`
+      }}
+    ></div>
+
+    <div className="collection-footer">
+      <div className="name">{title}</div>
+      {/* <span className="price">{price}</span> */}
+      <Popup
+        trigger={
+          <button inverted className="button">
+            More Details
+          </button>
+        }
+        position="left bottom"
+        on="hover"
+      >
+        <Card title="Left Center" authors={authors} />
+      </Popup>
     </div>
+  </div>
+);
+
+const Card = ({ title, authors }) => (
+  <div className="card">
+    <div className="header">{title} position </div>
+    <div className="content">Author :{authors}</div>
   </div>
 );
 

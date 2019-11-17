@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -14,12 +14,18 @@ import { selectCartHidden } from "../../redux/cart/selector";
 import { selectCurrentUser } from "../../redux/user/selector";
 
 const Header = ({ currentUser, hidden }) => {
+  // const [books, setBooks] = useState([]);
+
+  // useEffect(() => {
+  //   fetch("/books").then(res => res.json().then(books => setBooks(books)));
+  // }, []);
+
   return (
     <div className="header">
-      <Link to="/">Logo</Link>
+      <Link to="/">Home</Link>
       <div className="options">
-        <Link className="option" to="/shop">
-          SHOP
+        <Link className="option" to="/explore">
+          EXPLORE
         </Link>
         <Link className="option" to="/contact">
           CONTACT

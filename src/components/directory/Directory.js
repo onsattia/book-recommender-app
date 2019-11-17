@@ -1,51 +1,96 @@
 import React, { Component } from "react";
+import axios from "axios";
+
+import book from "../../assets/book.jpg";
 import "./Directory.scss";
-import MenuItem from "../menu-item/MenuItem";
+
+import MenuItem from "../../components/menu-item/MenuItem";
 
 class Directory extends Component {
   state = {
-    sections: [
-      {
-        title: "hats",
-        imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
-        id: 1,
-        linkUrl: "shop/hats"
-      },
-      {
-        title: "jackets",
-        imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
-        id: 2,
-        linkUrl: "shop/jackets"
-      },
-      {
-        title: "sneakers",
-        imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
-        id: 3,
-        linkUrl: "shop/sneakers"
-      },
-      {
-        title: "womens",
-        imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
-        size: "large",
-        id: 4,
-        linkUrl: "shop/womens"
-      },
-      {
-        title: "mens",
-        imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
-        size: "large",
-        id: 5,
-        linkUrl: "shop/mens"
-      }
-    ]
+    mostRatedBooks: [],
+    mostReviewedBooks: [],
+    highlyRatedAuthors: [],
+    authorsWithMostBooks: []
   };
 
+  componentDidMount() {
+    axios
+      .get(`/mostRatedBooks`)
+      .then(res => this.setState({ mostRatedBooks: res.data }))
+      .catch(err => console.log(err));
+
+    axios
+      .get(`/mostReviewedBooks`)
+      .then(res => this.setState({ mostReviewedBooks: res.data }))
+      .catch(err => console.log(err));
+
+    axios
+      .get(`/highlyRatedAuthors`)
+      .then(res => this.setState({ highlyRatedAuthors: res.data }))
+      .catch(err => console.log(err));
+
+    axios
+      .get(`/authorsWithMostBooks`)
+      .then(res => this.setState({ authorsWithMostBooks: res.data }))
+      .catch(err => console.log(err));
+  }
+
   render() {
+    let mostRatedBooks,
+      mostReviewedBooks,
+      highlyRatedAuthors,
+      authorsWithMostBooks;
+
+    if (
+      this.state.mostRatedBooks == null ||
+      this.state.mostReviewedBooks == null ||
+      this.state.highlyRatedAuthors == null ||
+      this.state.authorsWithMostBooks == null
+    ) {
+      return <div>Loading...</div>;
+    } else {
+      mostRatedBooks = this.state.mostRatedBooks.map(res => (
+        <MenuItem key={res.isbn} title={res.title} src={res.image_url} />
+      ));
+      mostReviewedBooks = this.state.mostReviewedBooks.map(res => (
+        <MenuItem key={res.isbn} title={res.title} src={res.image_url} />
+      ));
+      highlyRatedAuthors = this.state.highlyRatedAuthors.map((res, index) => (
+        <div key={index}>
+          <h3>{res.authors}</h3>
+        </div>
+      ));
+      authorsWithMostBooks = this.state.authorsWithMostBooks.map(
+        (res, index) => (
+          <div key={index}>
+            <h3>
+              {res.authors} with
+              <span> {res.title} Publications of Books</span>
+            </h3>
+          </div>
+        )
+      );
+    }
+
     return (
       <div className="directory-menu">
-        {this.state.sections.map(({ id, ...props }) => (
-          <MenuItem key={id} {...props} />
-        ))}
+        <div className="item">
+          <h1>Highly Rated Books</h1>
+          {mostRatedBooks}
+        </div>
+        <div className="item">
+          <h1>Books With Most Reviews</h1>
+          <div>{mostReviewedBooks}</div>
+        </div>
+        <div className="item">
+          <h1>Highly Rated Authors</h1>
+          {highlyRatedAuthors}
+        </div>
+        <div className="item">
+          <h1>Authors With Most Books</h1>
+          {authorsWithMostBooks}
+        </div>
       </div>
     );
   }
