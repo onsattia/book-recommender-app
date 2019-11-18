@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import truncate from "lodash.truncate";
 
 //MaterialUI
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -22,7 +23,7 @@ const theme = createMuiTheme({
       // Name of the rule
       elevation8: {
         // Some CSS
-        boxShadow: "0px 0px 0px 1px rgba(0,0,0,0.9)"
+        // boxShadow: "none"
       }
     }
   }
@@ -41,7 +42,12 @@ const styles = {
   icon: {
     color: "rgba(255, 255, 255, 0.54)"
   },
-  typography: {
+
+  div: {
+    width: 600,
+    height: 300,
+    overflow: "scroll",
+    border: "2px solid black",
     padding: theme.spacing(2)
   }
 };
@@ -50,7 +56,13 @@ class Explore extends Component {
   state = {
     books: [],
     anchorEl: null,
-    open: false
+    open: false,
+    book: {
+      title: "",
+      author: "",
+      description: "",
+      average_rating: ""
+    }
   };
 
   componentDidMount() {
@@ -60,8 +72,17 @@ class Explore extends Component {
       .catch(err => console.log(err));
   }
 
-  handleClick = event => {
-    this.setState({ ...this.state, anchorEl: event.currentTarget });
+  handleClick = (event, title, author, params) => {
+    this.setState({
+      ...this.state,
+      anchorEl: event.currentTarget,
+      book: {
+        title,
+        author,
+        description: params.description,
+        average_rating: params.average_rating
+      }
+    });
   };
 
   handleClose = () => {
@@ -78,8 +99,8 @@ class Explore extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
-          <GridList cellHeight={250} className={classes.gridList} cols={3}>
-            {books.map(({ isbn, title, image_url, authors }) => (
+          <GridList cellHeight={250} className={classes.gridList} cols={6}>
+            {books.map(({ isbn, title, image_url, authors, ...params }) => (
               <GridListTile key={isbn}>
                 <img src={image_url} alt={title} />
                 <GridListTileBar
@@ -90,7 +111,9 @@ class Explore extends Component {
                       aria-label={`info about ${title}`}
                       variant="contained"
                       aria-describedby={id}
-                      onClick={event => this.handleClick(event)}
+                      onClick={event =>
+                        this.handleClick(event, title, authors, params)
+                      }
                     >
                       <InfoIcon />
                     </IconButton>
@@ -110,15 +133,23 @@ class Explore extends Component {
                     horizontal: "left"
                   }}
                 >
-                  <Typography className={classes.typography}>
-                    Title: Lorem ipsum dolor <br />
-                    Decription: sit amet, consectetur adipiscing elit.
-                    Suspendisse feugiat nisi sed odio convallis, vitae facilisis
-                    neque tempus. Nam ac nunc accumsan, consectetur sem eget,
-                    molestie neque. Suspendisse velit leo, congue eget metus in,
-                    lacinia aliquam tellus. Interdum et malesuada fames ac ante
-                    ipsum primis in faucibus.
-                  </Typography>
+                  <div className={classes.div}>
+                    <h2>{this.state.book.title}</h2>
+                    <div>
+                      <h4>by: {this.state.book.author}</h4>
+                    </div>
+                    <div>
+                      <p>{this.state.book.average_rating} avg rating</p>
+                    </div>
+                    <div>
+                      <Typography>
+                        {truncate(this.state.book.description, {
+                          length: 400,
+                          separator: " "
+                        })}
+                      </Typography>
+                    </div>
+                  </div>
                 </Popover>
               </GridListTile>
             ))}
