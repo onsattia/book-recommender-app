@@ -1,40 +1,27 @@
 import React from "react";
-import Popup from "reactjs-popup";
 
+//MaterialUI
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
+import IconButton from "@material-ui/core/IconButton";
+import InfoIcon from "@material-ui/icons/Info";
+
+//Styling
 import "./BooksPreview.scss";
 
-const BooksPreview = ({ title, image_url, authors }) => (
-  <div className="collection-item">
-    <div
-      className="image"
-      style={{
-        backgroundImage: `url(${image_url})`
-      }}
-    ></div>
-
-    <div className="collection-footer">
-      <div className="name">{title}</div>
-      {/* <span className="price">{price}</span> */}
-      <Popup
-        trigger={
-          <button inverted className="button">
-            More Details
-          </button>
-        }
-        position="left bottom"
-        on="hover"
-      >
-        <Card title="Left Center" authors={authors} />
-      </Popup>
-    </div>
-  </div>
-);
-
-const Card = ({ title, authors }) => (
-  <div className="card">
-    <div className="header">{title} position </div>
-    <div className="content">Author :{authors}</div>
-  </div>
+const BooksPreview = ({ title, image_url, authors, icon }) => (
+  <GridListTile>
+    <img src={image_url} alt={title} />
+    <GridListTileBar
+      title={title}
+      subtitle={<span>by: {authors}</span>}
+      actionIcon={
+        <IconButton aria-label={`info about ${title}`} className={icon}>
+          <InfoIcon />
+        </IconButton>
+      }
+    />
+  </GridListTile>
 );
 
 export default BooksPreview;

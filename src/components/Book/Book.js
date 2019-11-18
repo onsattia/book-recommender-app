@@ -5,7 +5,7 @@ import "./Book.scss";
 
 const Book = ({ src }) => {
   return (
-    <div className="menu-item">
+    <div className="book">
       <img className="image" src={src} alt="" />
       <div>Rate this book</div>
       <div className="rating">
