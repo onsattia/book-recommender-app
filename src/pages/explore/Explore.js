@@ -6,6 +6,7 @@ import truncate from "lodash.truncate";
 //MaterialUI
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
@@ -43,13 +44,17 @@ const styles = {
   icon: {
     color: "rgba(255, 255, 255, 255)"
   },
-
   div: {
     width: 600,
     height: 260,
     overflow: "scroll",
     border: "2px solid black",
     padding: theme.spacing(2)
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginBottom: theme.spacing(3),
+    width: 700
   }
 };
 
@@ -105,6 +110,12 @@ class Explore extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
+          <TextField
+            label="Search"
+            id="margin-dense"
+            className={classes.textField}
+            margin="dense"
+          />
           <GridList cellHeight={250} className={classes.gridList} cols={6}>
             {books.map(({ isbn, title, image_url, authors, ...params }) => (
               <GridListTile key={isbn}>
@@ -162,7 +173,7 @@ class Explore extends Component {
                     <Typography variant="subtitle2">
                       {this.state.book.average_rating} avg rating
                     </Typography>
-                    <Typography variant="body1">
+                    <Typography variant="body1" align="justify">
                       {truncate(this.state.book.description, {
                         length: 400,
                         separator: " "

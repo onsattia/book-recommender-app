@@ -4,11 +4,15 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14),
+    0 7px 12px -5px rgba(33, 33, 33, 0.46);
+  background-color: #212121 !important;
 
-  .logo-container {
+  .home {
     height: 100%;
     width: 70px;
     padding: 25px;
+    color: #ffffff;
   }
 
   .options {
@@ -20,6 +24,7 @@
 
     .option {
       padding: 10px 15px;
+      color: #ffffff;
       cursor: pointer;
     }
   }

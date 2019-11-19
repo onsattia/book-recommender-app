@@ -13,7 +13,9 @@ import { selectCurrentUser } from "../../redux/user/selector";
 const Header = ({ currentUser, hidden }) => {
   return (
     <div className="header">
-      <Link to="/">Home</Link>
+      <Link to="/" className="home">
+        HOME
+      </Link>
       <div className="options">
         <Link className="option" to="/explore">
           EXPLORE
@@ -21,8 +23,8 @@ const Header = ({ currentUser, hidden }) => {
 
         {currentUser ? (
           <>
-            <Link className="option" to="/profile">
-              PROFILE
+            <Link className="option" to="/my-books">
+              MY BOOKS
             </Link>
 
             <div className="option" onClick={() => auth.signOut()}>
