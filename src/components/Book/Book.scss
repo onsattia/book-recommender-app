@@ -6,7 +6,10 @@
     width: 99px;
     height: 160px;
   }
-
+  .ratingTitle {
+    display: flex;
+    justify-content: center;
+  }
   .rating {
     transform: rotateY(180deg);
     display: flex;

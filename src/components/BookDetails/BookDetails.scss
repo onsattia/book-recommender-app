@@ -1,0 +1,45 @@
+.ratingTitle {
+  display: flex;
+  justify-content: center;
+}
+.rating {
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  display: block;
+  cursor: pointer;
+  width: 20px;
+  // background: #ccc;
+}
+
+.rating label:before {
+  content: "\f005";
+  font-family: fontAwesome;
+  position: relative;
+  display: block;
+  color: #ccc;
+}
+
+.rating label:after {
+  content: "\f005";
+  font-family: fontAwesome;
+  position: absolute;
+  display: block;
+  color: #f5a623;
+  top: 0;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after {
+  opacity: 1;
+}

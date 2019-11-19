@@ -7,7 +7,7 @@ const Book = ({ src }) => {
   return (
     <div className="book">
       <img className="image" src={src} alt="" />
-      <div>Rate this book</div>
+      <div className="ratingTitle">Rate this book</div>
       <div className="rating">
         <input type="radio" name="star" id="star1" />
         <label htmlFor="star1"></label>

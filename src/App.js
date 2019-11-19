@@ -8,6 +8,7 @@ import Home from "./pages/Home/Home";
 import Explore from "./pages/Explore/Explore";
 import Sign from "./pages/Sign/Sign";
 import Header from "./components/Header/Header";
+import BookDetails from "./components/BookDetails/BookDetails";
 
 //Styling
 import "./App.css";
@@ -58,6 +59,7 @@ class App extends Component {
               this.props.currentUser ? <Redirect to="/" /> : <Sign />
             }
           />
+          <Route path="/book-details/:isbn" component={BookDetails} />
         </Switch>
       </div>
     );

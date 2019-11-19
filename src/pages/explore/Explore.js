@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import truncate from "lodash.truncate";
 
 //MaterialUI
@@ -33,19 +34,19 @@ const styles = {
   root: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "space-around",
+    justifyContent: "center",
     overflow: "hidden"
   },
   gridList: {
-    width: "80%"
+    width: "90%"
   },
   icon: {
-    color: "rgba(255, 255, 255, 0.54)"
+    color: "rgba(255, 255, 255, 255)"
   },
 
   div: {
     width: 600,
-    height: 300,
+    height: 260,
     overflow: "scroll",
     border: "2px solid black",
     padding: theme.spacing(2)
@@ -58,10 +59,13 @@ class Explore extends Component {
     anchorEl: null,
     open: false,
     book: {
+      isbn: "",
+      image_url: "",
       title: "",
       author: "",
       description: "",
-      average_rating: ""
+      average_rating: "",
+      publication_year: ""
     }
   };
 
@@ -72,15 +76,17 @@ class Explore extends Component {
       .catch(err => console.log(err));
   }
 
-  handleClick = (event, title, author, params) => {
+  handleClick = (event, image_url, title, author, params) => {
     this.setState({
       ...this.state,
       anchorEl: event.currentTarget,
       book: {
+        image_url,
         title,
         author,
         description: params.description,
-        average_rating: params.average_rating
+        average_rating: params.average_rating,
+        publication_year: params.publication_year
       }
     });
   };
@@ -112,7 +118,13 @@ class Explore extends Component {
                       variant="contained"
                       aria-describedby={id}
                       onClick={event =>
-                        this.handleClick(event, title, authors, params)
+                        this.handleClick(
+                          event,
+                          image_url,
+                          title,
+                          authors,
+                          params
+                        )
                       }
                     >
                       <InfoIcon />
@@ -133,23 +145,30 @@ class Explore extends Component {
                     horizontal: "left"
                   }}
                 >
-                  <div className={classes.div}>
-                    <h2>{this.state.book.title}</h2>
-                    <div>
-                      <h4>by: {this.state.book.author}</h4>
-                    </div>
-                    <div>
-                      <p>{this.state.book.average_rating} avg rating</p>
-                    </div>
-                    <div>
-                      <Typography>
-                        {truncate(this.state.book.description, {
-                          length: 400,
-                          separator: " "
-                        })}
-                      </Typography>
-                    </div>
-                  </div>
+                  <Typography component="div" className={classes.div}>
+                    <Typography variant="h5">
+                      <Link
+                        to={{
+                          pathname: `/book-details/${isbn}`,
+                          state: { book: this.state.book }
+                        }}
+                      >
+                        {this.state.book.title}
+                      </Link>
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      by: {this.state.book.author}
+                    </Typography>
+                    <Typography variant="subtitle2">
+                      {this.state.book.average_rating} avg rating
+                    </Typography>
+                    <Typography variant="body1">
+                      {truncate(this.state.book.description, {
+                        length: 400,
+                        separator: " "
+                      })}
+                    </Typography>
+                  </Typography>
                 </Popover>
               </GridListTile>
             ))}
