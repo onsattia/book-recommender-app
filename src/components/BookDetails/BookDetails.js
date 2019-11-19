@@ -4,8 +4,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import IconButton from "@material-ui/core/IconButton";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
 import Typography from "@material-ui/core/Typography";
 
 //Styling
@@ -66,10 +64,14 @@ const BooksPreview = props => {
           </Grid>
         </Grid>
         <Grid item xs={12} sm={9}>
-          <h1>{title}</h1>
-          <p>by {author}</p>
-          <p>{average_rating} avg rating</p>
-          <p>{description}</p>
+          <Typography variant="h3">{title}</Typography>
+          <Typography variant="subtitle1">by {author}</Typography>
+          <Typography variant="subtitle1">
+            {average_rating} avg rating
+          </Typography>
+          <Typography variant="body1" align="justify">
+            {description}
+          </Typography>
         </Grid>
       </Grid>
     </div>

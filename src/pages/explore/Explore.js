@@ -162,7 +162,7 @@ class Explore extends Component {
                     <Typography variant="subtitle2">
                       {this.state.book.average_rating} avg rating
                     </Typography>
-                    <Typography variant="body1">
+                    <Typography variant="body1" align="justify">
                       {truncate(this.state.book.description, {
                         length: 400,
                         separator: " "
