@@ -82,8 +82,18 @@ const BooksPreview = props => {
             </Typography>
           </Grid>
         </Grid>
-      </CardContent>
-    </Card>
+        <Grid item xs={12} sm={9}>
+          <Typography variant="h3">{title}</Typography>
+          <Typography variant="subtitle1">by {author}</Typography>
+          <Typography variant="subtitle1">
+            {average_rating} avg rating
+          </Typography>
+          <Typography variant="body1" align="justify">
+            {description}
+          </Typography>
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 
