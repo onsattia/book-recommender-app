@@ -16,9 +16,7 @@ import "./App.css";
 
 //Utils
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
-
 import { setCurrentUser } from "./redux/user/actions";
-
 import { selectCurrentUser } from "./redux/user/selector";
 
 class App extends Component {

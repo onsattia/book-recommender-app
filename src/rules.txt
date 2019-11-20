@@ -1,5 +1,5 @@
 libraries
-Styles
 Core components 
+Styles
 Firebase
 Redux actions

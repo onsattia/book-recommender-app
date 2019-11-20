@@ -1,16 +1,19 @@
 import React from "react";
+import { connect } from "react-redux";
 
 //MaterialUI
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
 //Styling
 import "./BookDetails.scss";
+
+//actions
+import { addBook } from "../../redux/book/action";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,6 +45,9 @@ const BooksPreview = props => {
     average_rating
   } = props.location.state.book;
 
+  const book = props.location.state.book;
+
+  console.log(props);
   return (
     <Card className={classes.card}>
       <CardContent>
@@ -49,7 +55,9 @@ const BooksPreview = props => {
           <Grid item>
             <img className={classes.img} src={image_url} alt={props.title} />
             <Grid className={classes.button}>
-              <Button variant="outlined">Add to MyBooks</Button>
+              <Button variant="outlined" onClick={() => props.addBook(book)}>
+                Add to MyBooks
+              </Button>
             </Grid>
             <Grid>
               <div className="ratingTitle">Rate this book</div>
@@ -82,19 +90,13 @@ const BooksPreview = props => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid item xs={12} sm={9}>
-          <Typography variant="h3">{title}</Typography>
-          <Typography variant="subtitle1">by {author}</Typography>
-          <Typography variant="subtitle1">
-            {average_rating} avg rating
-          </Typography>
-          <Typography variant="body1" align="justify">
-            {description}
-          </Typography>
-        </Grid>
-      </Grid>
-    </div>
+      </CardContent>
+    </Card>
   );
 };
 
-export default BooksPreview;
+const mapDispatchToProps = dispatch => ({
+  addBook: book => dispatch(addBook(book))
+});
+
+export default connect(null, mapDispatchToProps)(BooksPreview);

@@ -64,13 +64,12 @@ class Explore extends Component {
     anchorEl: null,
     open: false,
     book: {
-      isbn: "",
-      image_url: "",
       title: "",
+      image_url: "",
       author: "",
       description: "",
       average_rating: "",
-      publication_year: ""
+      rest: {}
     }
   };
 
@@ -81,17 +80,18 @@ class Explore extends Component {
       .catch(err => console.log(err));
   }
 
-  handleClick = (event, image_url, title, author, params) => {
+  handleClick = (event, title, image_url, author, params) => {
     this.setState({
       ...this.state,
       anchorEl: event.currentTarget,
       book: {
-        image_url,
         title,
+        image_url,
         author,
         description: params.description,
         average_rating: params.average_rating,
-        publication_year: params.publication_year
+        publication_year: params.publication_year,
+        rest: params
       }
     });
   };
@@ -131,8 +131,8 @@ class Explore extends Component {
                       onClick={event =>
                         this.handleClick(
                           event,
-                          image_url,
                           title,
+                          image_url,
                           authors,
                           params
                         )

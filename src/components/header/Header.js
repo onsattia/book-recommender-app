@@ -10,7 +10,7 @@ import "./Header.scss";
 import { auth } from "../../firebase/firebase.utils";
 import { selectCurrentUser } from "../../redux/user/selector";
 
-const Header = ({ currentUser, hidden }) => {
+const Header = ({ currentUser }) => {
   return (
     <div className="header">
       <Link to="/" className="home">
