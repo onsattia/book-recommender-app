@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import truncate from "lodash.truncate";
+import { connect } from "react-redux";
 
 //MaterialUI
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -17,6 +17,9 @@ import Typography from "@material-ui/core/Typography";
 
 //Styling
 import "./Explore.scss";
+
+// Redux Actions
+import { getBooks } from "../../redux/books/action";
 
 const theme = createMuiTheme({
   overrides: {
@@ -60,39 +63,20 @@ const styles = {
 
 class Explore extends Component {
   state = {
-    books: [],
     anchorEl: null,
     open: false,
-    book: {
-      title: "",
-      image_url: "",
-      author: "",
-      description: "",
-      average_rating: "",
-      rest: {}
-    }
+    book: {}
   };
 
   componentDidMount() {
-    axios
-      .get(`/books`)
-      .then(res => this.setState({ books: res.data }))
-      .catch(err => console.log(err));
+    this.props.getBooks();
   }
 
-  handleClick = (event, title, image_url, author, params) => {
+  handleClick = (event, book) => {
     this.setState({
       ...this.state,
       anchorEl: event.currentTarget,
-      book: {
-        title,
-        image_url,
-        author,
-        description: params.description,
-        average_rating: params.average_rating,
-        publication_year: params.publication_year,
-        rest: params
-      }
+      book: book
     });
   };
 
@@ -101,7 +85,8 @@ class Explore extends Component {
   };
 
   render() {
-    const { books, anchorEl } = this.state;
+    const { anchorEl } = this.state;
+    const { books } = this.props;
     const { classes } = this.props;
 
     const open = anchorEl === null ? false : true;
@@ -117,26 +102,18 @@ class Explore extends Component {
             margin="dense"
           />
           <GridList cellHeight={250} className={classes.gridList} cols={6}>
-            {books.map(({ isbn, title, image_url, authors, ...params }) => (
-              <GridListTile key={isbn}>
-                <img src={image_url} alt={title} />
+            {books.map(book => (
+              <GridListTile key={book.isbn}>
+                <img src={book.image_url} alt={book.title} />
                 <GridListTileBar
-                  title={title}
-                  subtitle={<span>by: {authors}</span>}
+                  title={book.title}
+                  subtitle={<span>by: {book.authors}</span>}
                   actionIcon={
                     <IconButton
-                      aria-label={`info about ${title}`}
+                      aria-label={`info about ${book.title}`}
                       variant="contained"
                       aria-describedby={id}
-                      onClick={event =>
-                        this.handleClick(
-                          event,
-                          title,
-                          image_url,
-                          authors,
-                          params
-                        )
-                      }
+                      onClick={event => this.handleClick(event, book)}
                     >
                       <InfoIcon />
                     </IconButton>
@@ -160,7 +137,7 @@ class Explore extends Component {
                     <Typography variant="h5">
                       <Link
                         to={{
-                          pathname: `/book-details/${isbn}`,
+                          pathname: `/book-details/${book.isbn}`,
                           state: { book: this.state.book }
                         }}
                       >
@@ -190,4 +167,15 @@ class Explore extends Component {
   }
 }
 
-export default withStyles(styles)(Explore);
+const mapStateToProps = state => ({
+  books: state.books.books
+});
+
+const mapDispatchToProps = dispatch => ({
+  getBooks: () => dispatch(getBooks())
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(Explore));

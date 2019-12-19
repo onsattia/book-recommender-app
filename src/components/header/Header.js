@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
+import { selectBookItemsCount } from "../../redux/books/selector";
 //Styling
 import "./Header.scss";
 
@@ -25,6 +26,7 @@ const Header = ({ currentUser }) => {
           <>
             <Link className="option" to="/my-books">
               MY BOOKS
+              <span> (0)</span>
             </Link>
 
             <div className="option" onClick={() => auth.signOut()}>

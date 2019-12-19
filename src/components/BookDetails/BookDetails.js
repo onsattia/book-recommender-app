@@ -12,8 +12,8 @@ import Button from "@material-ui/core/Button";
 //Styling
 import "./BookDetails.scss";
 
-//actions
-import { addBook } from "../../redux/book/action";
+//Redux actions
+import { addBook } from "../../redux/books/action";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,13 +41,12 @@ const BooksPreview = props => {
     title,
     image_url,
     description,
-    author,
+    authors,
     average_rating
   } = props.location.state.book;
 
   const book = props.location.state.book;
 
-  console.log(props);
   return (
     <Card className={classes.card}>
       <CardContent>
@@ -81,7 +80,7 @@ const BooksPreview = props => {
           </Grid>
           <Grid item xs={12} sm={9}>
             <Typography variant="h3">{title}</Typography>
-            <Typography variant="subtitle1">by {author}</Typography>
+            <Typography variant="subtitle1">by {authors}</Typography>
             <Typography variant="subtitle1">
               {average_rating} avg rating
             </Typography>
