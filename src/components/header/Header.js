@@ -11,6 +11,7 @@ import { auth } from "../../firebase/firebase.utils";
 import { selectCurrentUser } from "../../redux/user/selector";
 
 const Header = ({ currentUser }) => {
+  console.log(currentUser);
   return (
     <div className="header">
       <Link to="/" className="home">

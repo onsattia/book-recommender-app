@@ -145,7 +145,7 @@ class Explore extends Component {
                       </Link>
                     </Typography>
                     <Typography variant="subtitle1">
-                      by: {this.state.book.author}
+                      by: {this.state.book.authors}
                     </Typography>
                     <Typography variant="subtitle2">
                       {this.state.book.average_rating} avg rating

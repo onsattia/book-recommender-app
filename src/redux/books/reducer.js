@@ -2,7 +2,8 @@ import { addBook } from "./utils";
 
 const INITIAL_STATE = {
   books: [],
-  myBooks: []
+  myBooks: [],
+  recommendedBooks: []
 };
 
 const booksReducer = (state = INITIAL_STATE, action) => {
@@ -23,6 +24,16 @@ const booksReducer = (state = INITIAL_STATE, action) => {
         myBooks: state.myBooks.filter(
           myBook => myBook.bookID !== action.payload.bookID
         )
+      };
+    case "GET_RECOMMENDED_BOOKS":
+      return {
+        ...state,
+        recommendedBooks: action.payload
+      };
+    case "EMPTY_RECOMMENDEDBOOK":
+      return {
+        ...state,
+        recommendedBooks: []
       };
     default:
       return state;

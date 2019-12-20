@@ -47,7 +47,7 @@ const BooksPreview = props => {
   } = props.location.state.book;
 
   const book = props.location.state.book;
-
+  console.log(props.currentUser);
   return (
     <Card className={classes.card}>
       <CardContent>
@@ -55,7 +55,15 @@ const BooksPreview = props => {
           <Grid item>
             <img className={classes.img} src={image_url} alt={props.title} />
             <Grid className={classes.button}>
-              <Button variant="outlined" onClick={() => props.addBook(book)}>
+              <Button
+                variant="outlined"
+                onClick={() =>
+                  props.currentUser === null
+                    ? props.history.push("/sign")
+                    : props.addBook(book) &&
+                      window.alert("Book added to your books")
+                }
+              >
                 Add to MyBooks
               </Button>
             </Grid>
@@ -95,8 +103,13 @@ const BooksPreview = props => {
   );
 };
 
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+});
 const mapDispatchToProps = dispatch => ({
   addBook: book => dispatch(addBook(book))
 });
 
-export default withRouter(connect(null, mapDispatchToProps)(BooksPreview));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(BooksPreview)
+);
