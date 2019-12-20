@@ -16,3 +16,8 @@ export const getBooks = () => dispatch => {
     )
     .catch(err => console.log(err));
 };
+
+export const removeBook = book => ({
+  type: "REMOVE_BOOK",
+  payload: book
+});

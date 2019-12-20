@@ -1,8 +1,5 @@
 import { createSelector } from "reselect";
 
-const selectBook = state => state.myBooks;
+const selectBook = state => state.books.myBooks;
 
-export const selectBookItems = createSelector(
-  [selectBook],
-  book => book.bookItems
-);
+export const selectBookItems = createSelector([selectBook], myBooks => myBooks);

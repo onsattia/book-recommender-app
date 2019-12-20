@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 //MaterialUI
 import { makeStyles } from "@material-ui/core/styles";
@@ -98,4 +99,4 @@ const mapDispatchToProps = dispatch => ({
   addBook: book => dispatch(addBook(book))
 });
 
-export default connect(null, mapDispatchToProps)(BooksPreview);
+export default withRouter(connect(null, mapDispatchToProps)(BooksPreview));
